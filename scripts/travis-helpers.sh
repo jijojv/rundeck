@@ -125,14 +125,14 @@ trigger_travis_build() {
     {
         "request": {
             "branch": "${branch}",
-            "message": "Rundeck OSS triggered build."
-        },
-        "config": {
-            "merge_mode": "deep_merge",
-            "env": {
-                "UPSTREAM_PROJECT": "rundeck",
-                "UPSTREAM_BUILD_NUMBER": "${RUNDECK_BUILD_NUMBER}",
-                "UPSTREAM_BRANCH": "${RUNDECK_BRANCH}"
+            "message": "Rundeck OSS triggered build.",
+            "config": {
+                "merge_mode": "deep_merge",
+                "env": {
+                    "UPSTREAM_PROJECT": "rundeck",
+                    "UPSTREAM_BUILD_NUMBER": "${RUNDECK_BUILD_NUMBER}",
+                    "UPSTREAM_BRANCH": "${RUNDECK_BRANCH}"
+                }
             }
         }
     }
