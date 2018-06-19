@@ -50,8 +50,8 @@ jobs:
     - source scripts/travis-helpers.sh
 
     # - script_block 'build' 'make TAG=$RUNDECK_RELEASE_TAG BUILD_NUM=$RUNDECK_BUILD_NUMBER rpm deb'
-    - script_block 'sync-artifacts' fetch_common_artifacts
-    - script_block 'build.docker.rdtest' build_rdtest
+    # - script_block 'sync-artifacts' fetch_common_artifacts
+    # - script_block 'build.docker.rdtest' build_rdtest
 
     # - mkdir -p artifacts/packaging
     # - mkdir -p artifacts/rundeckapp/build

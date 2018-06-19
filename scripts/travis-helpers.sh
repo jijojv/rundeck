@@ -134,7 +134,7 @@ trigger_travis_build() {
                 "UPSTREAM_BUILD_NUMBER": "${RUNDECK_BUILD_NUMBER}",
                 "UPSTREAM_BRANCH": "${RUNDECK_BRANCH}"
             }
-        },
+        }
     }
 EOF
 )
