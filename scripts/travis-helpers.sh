@@ -17,7 +17,8 @@ set -e
 
 source scripts/helpers.sh
 
-export RUNDECK_BUILD_NUMBER="${TRAVIS_BUILD_NUMBER}"
+# export RUNDECK_BUILD_NUMBER="${TRAVIS_BUILD_NUMBER}"
+export RUNDECK_BUILD_NUMBER="3467"
 export RUNDECK_COMMIT="${TRAVIS_COMMIT}"
 export RUNDECK_BRANCH="${TRAVIS_BRANCH}"
 
@@ -115,11 +116,12 @@ fetch_commit_common_artifacts() {
 
 trigger_travis_build() {
     local token="${1:?Must supply token}"
-    local owner="${2:?Must supply owner}"
-    local repo="${3:?Must supply repo}"
-    local branch="${4:?Must spupply branch}"
+    local travis_flav="${2:?Must supply org or com}"
+    local owner="${3:?Must supply owner}"
+    local repo="${4:?Must supply repo}"
+    local branch="${5:?Must spupply branch}"
 
-    local body<<EOF
+    local body=$(cat <<EOF
     {
         "request": {
             "branch": "${branch}",
@@ -135,6 +137,7 @@ trigger_travis_build() {
         },
     }
 EOF
+)
 
     curl -s -X POST \
         -H "Content-Type: application/json" \
@@ -142,7 +145,7 @@ EOF
         -H "Travis-API-Version: 3" \
         -H "Authorization: token ${token}" \
         -d "$body" \
-        https://api.travis-ci.com/repo/${owner}%2F${repo}/requests
+        https://api.travis-ci.${travis_flav}/repo/${owner}%2F${repo}/requests
 }
 
 build_rdtest() {
