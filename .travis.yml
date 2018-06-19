@@ -61,6 +61,8 @@ jobs:
     - cp -r --parents rundeck-storage/**/build/libs artifacts/
 
     - script_block 'sync-artifacts' sync_to_s3
+
+    - script_block 'travis-trigger.testdeck' 'trigger_travis_build "${TRAVIS_OSS_TOKEN}" rundeck testdeck test-deck-trigger'
   
   # Stage: test
   - stage: test
@@ -185,9 +187,10 @@ branches:
     - release-2.11
     - prerelease-2.12.0
     - /^v.*/
+    - test-deck-trigger
 
-notifications:
-  irc:
-  - irc.freenode.org#rundeck
-  slack:
-    secure: ep3APeVD6QwEkTJ8YR0f1eDzcFJ2uLUIci4Aob/5ILm+v8h0hOTAe1yFoKv+iR/4PCeZ+5PvVezOMHSkFNX7rCj06Mj/ivlnng569JLjOQAR0q25aeIH+wy4oDE33HaNbNOYLMe7bXDP4SelRi9SbRRe84j6OjDgZzyDC36cyAk=
+# notifications:
+#   irc:
+#   - irc.freenode.org#rundeck
+#   slack:
+#     secure: ep3APeVD6QwEkTJ8YR0f1eDzcFJ2uLUIci4Aob/5ILm+v8h0hOTAe1yFoKv+iR/4PCeZ+5PvVezOMHSkFNX7rCj06Mj/ivlnng569JLjOQAR0q25aeIH+wy4oDE33HaNbNOYLMe7bXDP4SelRi9SbRRe84j6OjDgZzyDC36cyAk=
