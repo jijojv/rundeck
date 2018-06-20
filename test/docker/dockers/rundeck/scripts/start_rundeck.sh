@@ -247,7 +247,7 @@ rdeck.base=/home/rundeck
 
 #rss.enabled if set to true enables RSS feeds that are public (non-authenticated)
 rss.enabled=false
-server.address=rundeck1
+server.address=${RUNDECK_NODE}
 grails.serverURL=${RUNDECK_URL}
 dataSource.dbCreate = update
 dataSource.url = jdbc:h2:file:/home/rundeck/server/data/grailsdb;MVCC=true
