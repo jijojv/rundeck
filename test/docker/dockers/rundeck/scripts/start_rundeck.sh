@@ -241,21 +241,6 @@ if [ -n "$SETUP_SSL" ] ; then
     setup_ssl $RDECK_BASE
 fi
 
-if [ -n "$NODE_CACHE_FIRST_LOAD_SYNCH" ] ; then
-  cat - >>$RDECK_BASE/server/config/rundeck-config.properties <<END
-rundeck.nodeService.nodeCache.firstLoadAsynch=false
-END
-fi
-
-### PRE CONFIG
-# RUN TEST PRESTART SCRIPT
-if [[ ! -z "$CONFIG_SCRIPT_PRESTART" && -f $CONFIG_SCRIPT_PRESTART ]];
-then
-  . $CONFIG_SCRIPT_PRESTART
-else
-  echo "### Pre start config not set. skipping..."
-fi
-
 cat > $HOME/server/config/rundeck-config.properties <<END
 loglevel.default=INFO
 rdeck.base=/home/rundeck
@@ -282,6 +267,20 @@ rundeck.security.authorization.preauthenticated.redirectUrl=/oauth2/sign_in
 rundeck.log4j.config.file=/home/rundeck/server/config/log4j.properties
 END
 
+if [ -n "$NODE_CACHE_FIRST_LOAD_SYNCH" ] ; then
+  cat - >>$RDECK_BASE/server/config/rundeck-config.properties <<END
+rundeck.nodeService.nodeCache.firstLoadAsynch=false
+END
+fi
+
+### PRE CONFIG
+# RUN TEST PRESTART SCRIPT
+if [[ ! -z "$CONFIG_SCRIPT_PRESTART" && -f $CONFIG_SCRIPT_PRESTART ]];
+then
+  . $CONFIG_SCRIPT_PRESTART
+else
+  echo "### Pre start config not set. skipping..."
+fi
 
 # (start rundeck)
 #sudo su - rundeck bash -c "RDECK_BASE=$RDECK_BASE $HOME/server/sbin/rundeckd start"
