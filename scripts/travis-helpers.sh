@@ -169,7 +169,9 @@ build_rdtest() {
     fi
 
     docker tag rdtest:latest rundeckapp/testdeck:rdtest-${RUNDECK_BUILD_NUMBER}
+    docker tag rdtest:latest rundeckapp/testdeck:rdtest-${RUNDECK_BRANCH}
     docker push rundeckapp/testdeck:rdtest-${RUNDECK_BUILD_NUMBER}
+    docker push rundeckapp/testdeck:rdtest-${RUNDECK_BRANCH}
 }
 
 pull_rdtest() {
