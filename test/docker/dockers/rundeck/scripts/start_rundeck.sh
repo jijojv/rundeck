@@ -256,6 +256,33 @@ else
   echo "### Pre start config not set. skipping..."
 fi
 
+cat > $HOME/server/config/rundeck-config.properties <<END
+loglevel.default=INFO
+rdeck.base=/home/rundeck
+
+#rss.enabled if set to true enables RSS feeds that are public (non-authenticated)
+rss.enabled=false
+server.address=rundeck1
+grails.serverURL=${RUNDECK_URL}
+dataSource.dbCreate = update
+dataSource.url = jdbc:h2:file:/home/rundeck/server/data/grailsdb;MVCC=true
+
+# Pre Auth mode settings
+rundeck.security.authorization.preauthenticated.enabled=false
+rundeck.security.authorization.preauthenticated.attributeName=REMOTE_USER_GROUPS
+rundeck.security.authorization.preauthenticated.delimiter=,
+# Header from which to obtain user name
+rundeck.security.authorization.preauthenticated.userNameHeader=X-Forwarded-Uuid
+# Header from which to obtain list of roles
+rundeck.security.authorization.preauthenticated.userRolesHeader=X-Forwarded-Roles
+# Redirect to upstream logout url
+rundeck.security.authorization.preauthenticated.redirectLogout=false
+rundeck.security.authorization.preauthenticated.redirectUrl=/oauth2/sign_in
+
+rundeck.log4j.config.file=/home/rundeck/server/config/log4j.properties
+END
+
+
 # (start rundeck)
 #sudo su - rundeck bash -c "RDECK_BASE=$RDECK_BASE $HOME/server/sbin/rundeckd start"
 $HOME/server/sbin/rundeckd start
