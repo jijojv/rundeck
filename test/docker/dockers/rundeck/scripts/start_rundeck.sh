@@ -36,12 +36,16 @@ LOGFILE=$RDECK_BASE/var/log/service.log
 mkdir -p $(dirname $LOGFILE)
 FWKPROPS=$HOME/etc/framework.properties
 mkdir -p $(dirname $FWKPROPS)
-# export RUNDECK_PORT=4440
-# export RUNDECK_URL=http://$RUNDECK_NODE:$RUNDECK_PORT
+
+export RUNDECK_PORT=${RUNDECK_PORT:-4440}
+export RUNDECK_URL=${RUNDECK_URL:-http://$RUNDECK_NODE:$RUNDECK_PORT}
+
+
 # if [ -n "$SETUP_SSL" ] ; then
 #   export RUNDECK_PORT=4443
 #   export RUNDECK_URL=https://$RUNDECK_NODE:$RUNDECK_PORT
 # fi
+
 cat > $FWKPROPS <<END
 framework.server.name = $RUNDECK_NODE
 framework.server.hostname = $RUNDECK_NODE
