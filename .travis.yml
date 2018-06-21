@@ -49,8 +49,8 @@ jobs:
     - shopt -s globstar
     - source scripts/travis-helpers.sh
 
-    # - script_block 'build' 'make TAG=$RUNDECK_RELEASE_TAG BUILD_NUM=$RUNDECK_BUILD_NUMBER rpm deb'
-    - script_block 'sync-artifacts' fetch_common_artifacts
+    - script_block 'build' 'make TAG=$RUNDECK_RELEASE_TAG BUILD_NUM=$RUNDECK_BUILD_NUMBER rpm deb'
+    # - script_block 'sync-artifacts' fetch_common_artifacts
     - script_block 'build.docker.rdtest' build_rdtest
 
     # - mkdir -p artifacts/packaging
@@ -61,9 +61,9 @@ jobs:
     # - cp -r --parents rundeckapp/**/build/libs artifacts/
     # - cp -r --parents rundeck-storage/**/build/libs artifacts/
 
-    # - script_block 'sync-artifacts' sync_to_s3
+    - script_block 'sync-artifacts' sync_to_s3
 
-    - script_block 'travis-trigger.testdeck' 'trigger_travis_build "${TRAVIS_OSS_TOKEN}" org rundeck testdeck test-deck-trigger'
+    # - script_block 'travis-trigger.testdeck' 'trigger_travis_build "${TRAVIS_OSS_TOKEN}" org rundeck testdeck test-deck-trigger'
   
   # Stage: test
   - stage: test
