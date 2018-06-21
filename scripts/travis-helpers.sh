@@ -175,7 +175,8 @@ build_rdtest() {
 }
 
 pull_rdtest() {
-    docker pull rundeckapp/testdeck:rdtest-latest
+    docker pull rundeckapp/testdeck:rdtest-${RUNDECK_BUILD_NUMBER}
+    docker tag rundeckapp/testdeck:rdtest-${RUNDECK_BUILD_NUMBER} rdtest:latest
 }
 
 export_tag_info
