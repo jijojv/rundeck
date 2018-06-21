@@ -53,13 +53,13 @@ jobs:
     # - script_block 'sync-artifacts' fetch_common_artifacts
     - script_block 'build.docker.rdtest' build_rdtest
 
-    # - mkdir -p artifacts/packaging
-    # - mkdir -p artifacts/rundeckapp/build
+    - mkdir -p artifacts/packaging
+    - mkdir -p artifacts/rundeckapp/build
 
-    # - find ./packaging -regex '.*\.\(deb\|rpm\)' -exec cp --parents {} artifacts \;
-    # - cp -r --parents core/build/libs artifacts/
-    # - cp -r --parents rundeckapp/**/build/libs artifacts/
-    # - cp -r --parents rundeck-storage/**/build/libs artifacts/
+    - find ./packaging -regex '.*\.\(deb\|rpm\)' -exec cp --parents {} artifacts \;
+    - cp -r --parents core/build/libs artifacts/
+    - cp -r --parents rundeckapp/**/build/libs artifacts/
+    - cp -r --parents rundeck-storage/**/build/libs artifacts/
 
     - script_block 'sync-artifacts' sync_to_s3
 
