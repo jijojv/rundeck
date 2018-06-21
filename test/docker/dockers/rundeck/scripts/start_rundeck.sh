@@ -36,12 +36,12 @@ LOGFILE=$RDECK_BASE/var/log/service.log
 mkdir -p $(dirname $LOGFILE)
 FWKPROPS=$HOME/etc/framework.properties
 mkdir -p $(dirname $FWKPROPS)
-export RUNDECK_PORT=4440
-export RUNDECK_URL=http://$RUNDECK_NODE:$RUNDECK_PORT
-if [ -n "$SETUP_SSL" ] ; then
-  export RUNDECK_PORT=4443
-  export RUNDECK_URL=https://$RUNDECK_NODE:$RUNDECK_PORT
-fi
+# export RUNDECK_PORT=4440
+# export RUNDECK_URL=http://$RUNDECK_NODE:$RUNDECK_PORT
+# if [ -n "$SETUP_SSL" ] ; then
+#   export RUNDECK_PORT=4443
+#   export RUNDECK_URL=https://$RUNDECK_NODE:$RUNDECK_PORT
+# fi
 cat > $FWKPROPS <<END
 framework.server.name = $RUNDECK_NODE
 framework.server.hostname = $RUNDECK_NODE
@@ -247,7 +247,7 @@ rdeck.base=/home/rundeck
 
 #rss.enabled if set to true enables RSS feeds that are public (non-authenticated)
 rss.enabled=false
-server.address=${RUNDECK_NODE}
+server.address=0.0.0.0
 grails.serverURL=${RUNDECK_URL}
 dataSource.dbCreate = update
 dataSource.url = jdbc:h2:file:/home/rundeck/server/data/grailsdb;MVCC=true
